@@ -1,9 +1,10 @@
 import java.util.Objects;
 
 public class Product {
-    public String getName() {
-        return name;
-    }
+    public int id;
+    public String name;
+    public int price;
+    public String category;
 
     public Product(int id, String name, int price, String category) {
         this.id = id;
@@ -12,16 +13,9 @@ public class Product {
         this.category = category;
     }
 
-    public int id;
-    public String name;
-    public int price;
-    public String category;
-
     @Override
     public String toString() {
         return "Товар - Артикул: " + this.id + ", название - " + this.name + ". цена - " + this.price + ". категория - " + this.category;
-
-
     }
 
     @Override

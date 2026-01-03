@@ -8,14 +8,12 @@ public class Order {
     public Order(String customer, Product[] basket) {
         this.customer = customer;
         this.basket = basket;
-
-
     }
 
     @Override
-    public String toString(){//чисто для эксперимента
-        String [] orderName = new String[basket.length];
-        int [] orderPrice = new int[basket.length];
+    public String toString() {//чисто для эксперимента
+        String[] orderName = new String[basket.length];
+        int[] orderPrice = new int[basket.length];
         for (int i = 0; i < basket.length; i++) {
             orderName[i] = basket[i].name;
             orderPrice[i] = basket[i].price;
@@ -23,6 +21,7 @@ public class Order {
         return "Заказ " + customer + ". Наименование товаров: " + Arrays.toString(orderName)
                 + " Цена товаров: " + Arrays.toString(orderPrice);
     }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
@@ -30,6 +29,11 @@ public class Order {
             return false;
         }
         Order order = (Order) obj;
+        for (int i = 0; i < basket.length; i++) {
+            if (basket[i] == null || order.basket[i] == null && basket[i] != order.basket[i]) ;
+            return false;
+
+        }
         return Objects.equals(customer, order.customer) && Arrays.equals(basket, order.basket);
     }
 }
