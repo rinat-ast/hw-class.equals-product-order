@@ -24,23 +24,32 @@ public class Order {
 
     @Override
     public boolean equals(Object o) {
+        if (o == null) {
+            return false;
+        }
+        if (getClass() != o.getClass()) {
+            return false;
+        }
         Order order = (Order) o;
-        if (customer.equals(order.customer)) return false;
-        if (basket == null) return false;
-        if (order.basket == null) return false;
-        if (basket.length != order.basket.length) return false;
+        if (customer == null || order.customer == null) return false;// проверка на нуль!
+        if (!customer.equals(order.customer)) return false;
+        // тут сравниваем две переменные с типом String
+        if (basket == null || order.basket == null) {
+            return false;
+        }
+        if (basket.length != order.basket.length) return false;// проверка на совпадение длин массивов?
         for (int i = 0; i < basket.length; i++) {
-            if (basket[i].name == null) return false;
-            if (order.basket[i].name == null) return false;
-            if (!basket[i].name.equals(order.basket[i].name)){
-//                System.out.println(basket[i].name +" -и- "+ order.basket[i].name);
+            if (basket[i] == null || order.basket[i] == null) return false;
+            if (!basket[i].equals(order.basket[i])) {// или тут вызывается equals класса Product?
                 return false;
             }
         }
         return true;
 
     }
+
 }
+
 
 
 
