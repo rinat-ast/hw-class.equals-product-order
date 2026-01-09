@@ -24,30 +24,41 @@ public class Order {
 
     @Override
     public boolean equals(Object o) {
-        if (o == null) {
+        if (o == null) {//Проверяем есть ли объект
             return false;
         }
-        if (getClass() != o.getClass()) {
+        if (getClass() != o.getClass()) {//Проверка к одному ли классу принадлежат объекты
             return false;
         }
         Order order = (Order) o;
-        if (customer == null || order.customer == null) return false;// проверка на нуль!
-        if (!customer.equals(order.customer)) return false;
-        // тут сравниваем две переменные с типом String
-        if (basket == null || order.basket == null) {
+        if (customer == null || order.customer == null) {
+            return false;// проверка строк на нуль, если не равны возвращаем false
+        }
+        if (!Objects.equals(customer, order.customer)) {//Сравниваем строки, если не равны возвращаем false
             return false;
         }
-        if (basket.length != order.basket.length) return false;// проверка на совпадение длин массивов?
+        if (basket == null && order.basket == null) { // Если оба массива равны нулю - то возвращаем true
+            return true;
+        }
+        if (basket == null || order.basket == null) {// Проверка массивов на нуль, если не равны возвращаем false
+            return false;
+        }
+        if (basket.length != order.basket.length) {// проверка на совпадение длин массивов.
+            return false;
+        }
         for (int i = 0; i < basket.length; i++) {
-            if (basket[i] == null || order.basket[i] == null) return false;
+            if (basket == null && order.basket == null) { // Если оба массива равны нулю - то возвращаем true
+                return true;
+            }
+            if (basket[i] == null || order.basket[i] == null) {
+                return false;
+            }
             if (!basket[i].equals(order.basket[i])) {// или тут вызывается equals класса Product?
                 return false;
             }
         }
         return true;
-
     }
-
 }
 
 
