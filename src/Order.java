@@ -24,21 +24,18 @@ public class Order {
 
     @Override
     public boolean equals(Object o) {
-        if (o == null) {//Проверяем есть ли объект
-            return false;
+        if (this == o) {//сравнили объекты, если равны то вернуть true
+            return true;
         }
-        if (getClass() != o.getClass()) {//Проверка к одному ли классу принадлежат объекты
+        if (o == null || getClass() != o.getClass()) {// сравнили их классы, если равны то вернуть false
             return false;
         }
         Order order = (Order) o;
-        if (customer == null || order.customer == null) {
-            return false;// проверка строк на нуль, если не равны возвращаем false
-        }
         if (!Objects.equals(customer, order.customer)) {//Сравниваем строки, если не равны возвращаем false
             return false;
         }
-        if (basket == null && order.basket == null) { // Если оба массива равны нулю - то возвращаем true
-            return true;
+        if (basket == null && order.basket == null) { // Если оба массива равны нулю - то возвращаем true.
+            return true;//дальше проверять смысла нет.
         }
         if (basket == null || order.basket == null) {// Проверка массивов на нуль, если не равны возвращаем false
             return false;
@@ -47,13 +44,13 @@ public class Order {
             return false;
         }
         for (int i = 0; i < basket.length; i++) {
-            if (basket == null && order.basket == null) { // Если оба массива равны нулю - то возвращаем true
-                return true;
+            if (basket[i] == null && order.basket[i] == null) {//если объектов нет, то по сути они равны. чтоб не выбрасило исключение NullPointException  мы пропускаем дальнейшую итерацию.
+                continue;
             }
-            if (basket[i] == null || order.basket[i] == null) {
+            if (basket[i] == null || order.basket[i] == null) {//если в одном из объектов нуль, то вернуть false
                 return false;
             }
-            if (!basket[i].equals(order.basket[i])) {// или тут вызывается equals класса Product?
+            if (!basket[i].equals(order.basket[i])) {// тут вызывается equals класса Product
                 return false;
             }
         }
